@@ -76,6 +76,7 @@ def read_cifar10(filename_queue):
   # Read a record, getting filenames from the filename_queue.  No
   # header or footer in the CIFAR-10 format, so we leave header_bytes
   # and footer_bytes at their default of 0.
+  #tf.FixedLengthRecordReader(record_bytes=record_bytes)的意思是创建一个reader，每次在文件中读取record_bytes字节的数据，直到文件结束
   reader = tf.FixedLengthRecordReader(record_bytes=record_bytes)
   result.key, value = reader.read(filename_queue)
 
