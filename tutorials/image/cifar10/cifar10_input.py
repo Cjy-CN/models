@@ -170,15 +170,18 @@ def distorted_inputs(data_dir, batch_size):
     # distortions applied to the image.
 
     # Randomly crop a [height, width] section of the image.
+    # 随机剪裁图片，从32*32剪裁到24*24
     distorted_image = tf.random_crop(reshaped_image, [height, width, 3])
 
     # Randomly flip the image horizontally.
+    # 随机翻转图片，每张图片有50%的概率被左右翻转，另有50%保持不变
     distorted_image = tf.image.random_flip_left_right(distorted_image)
 
     # Because these operations are not commutative, consider randomizing
     # the order their operation.
     # NOTE: since per_image_standardization zeros the mean and makes
     # the stddev unit, this likely has no effect see tensorflow#1458.
+    # 随机改变亮度和对比度
     distorted_image = tf.image.random_brightness(distorted_image,
                                                  max_delta=63)
     distorted_image = tf.image.random_contrast(distorted_image,
